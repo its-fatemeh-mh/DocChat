@@ -7,8 +7,7 @@ from langchain.llms import LlamaCpp
 from langchain.embeddings import LlamaCppEmbeddings
 from langchain.chains import LLMChain
 from langchain.vectorstores import Chroma 
-
-
+ 
 
 #streamlit layout
 st.set_page_config(page_title="DocChat", layout="wide",)
@@ -53,7 +52,7 @@ doc = st.file_uploader("Upload a pdf file", type="pdf", accept_multiple_files=Fa
 if doc is not None:
     file_path = "./temp"
     save_pdf(doc,file_path)
-    loader = PyPDFLoader(file_path)
+    loader = PyPDFLoader("./temp/1212.pdf")
     pages = loader.load_and_split()
     vectordb = Chroma.from_documents(pages, embeddings)
     st.success("File has been loaded successfully!")
