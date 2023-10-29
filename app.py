@@ -4,6 +4,7 @@ import os
 import streamlit as st 
 from langchain.prompts import PromptTemplate
 from langchain.llms import LlamaCpp 
+from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import LlamaCppEmbeddings
 from langchain.chains import LLMChain
 from langchain.vectorstores import Chroma 
@@ -53,8 +54,10 @@ if doc is not None:
     file_path = "./temp"
     save_pdf(doc,file_path)
     loader = PyPDFLoader(file_path=f"./temp/{doc.name}")
-    pages = loader.load_and_split()
-    vectordb = Chroma.from_documents(pages, embeddings)
+    #pages = loader.load_and_split()
+    text_splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=0)
+    texts = text_splitter.split_documents(loader)
+    vectordb = Chroma.from_documents(texts, embeddings)
     st.success("File has been loaded successfully!")
 
 #Quering through LLM
