@@ -52,7 +52,7 @@ doc = st.file_uploader("Upload a pdf file", type="pdf", accept_multiple_files=Fa
 if doc is not None:
     file_path = "./temp"
     save_pdf(doc,file_path)
-    loader = PyPDFLoader(file_path=file_path+doc)
+    loader = PyPDFLoader(file_path=f"./temp/{doc.name}")
     pages = loader.load_and_split()
     vectordb = Chroma.from_documents(pages, embeddings)
     st.success("File has been loaded successfully!")
