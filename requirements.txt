@@ -76,6 +76,8 @@ pydantic==2.4.2
 pydantic_core==2.10.1
 pydeck==0.8.1b0
 Pygments==2.16.1
+PyMuPDF==1.23.5
+PyMuPDFb==1.23.5
 pypdf==3.17.0
 PyPDF2==3.0.1
 PyPika==0.48.9

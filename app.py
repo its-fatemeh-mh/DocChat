@@ -1,6 +1,5 @@
 from PyPDF2 import PdfReader
-from langchain.document_loaders import PyPDFLoader, TextLoader
-import os 
+from langchain.document_loaders import TextLoader
 import streamlit as st 
 from langchain.prompts import PromptTemplate
 from langchain.llms import LlamaCpp 
@@ -8,13 +7,13 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import LlamaCppEmbeddings
 from langchain.chains import LLMChain
 from langchain.vectorstores import Chroma 
-import fitz
+
 
 #streamlit layout
 st.set_page_config(page_title="DocChat", layout="wide",)
 st.markdown(f"""
             <style>
-            .stApp {{background-image: url("https://images.unsplash.com/photo-1509537257950-20f875b03669?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80"); 
+            .stApp {{background-image: url("https://pin.it/5NfUzhS"); 
                      background-attachment: fixed;
                      background-attachment: fixed;
                      background-size: cover}}
@@ -23,12 +22,7 @@ st.markdown(f"""
          
 
 
-# Saving a Document
-def save_pdf(doc,file_path):
-    with open(os.path.join(file_path, doc.name), "wb") as f:
-        f.write(doc.read())
-    return  st.success(f"PDF file '{doc.name}' has been saved." )   
-
+# Getting text data 
 def get_pdf_text(pdf):
     pdf_reader = PdfReader(pdf)
     text = ""
